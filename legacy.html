@@ -15,24 +15,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-settings_menu.js"></script>
     <style>
         @font-face {
-            font-family: 'Aller';
-            src: url(https://delivercdn.pages.dev/fonts/aller/aller-regular.ttf);
-            font-weight: 400;
-            font-style: normal;
+            font-family: 'Roadway';
+            src: url(https://delivercdn.pages.dev/fonts/roadway/roadway.ttf);
         }
 
         @font-face {
-            font-family: 'Aller Bold';
-            src: url(https://delivercdn.pages.dev/fonts/aller/aller-bold.ttf);
-            font-weight: 700;
-            font-style: bold;
-        }
-
-        @font-face {
-            font-family: 'Aller Mono';
-            src: url(https://delivercdn.pages.dev/fonts/aller/allermono.ttf);
-            font-weight: 400;
-            font-style: normal;
+            font-family: 'Digamma Mono';
+            src: url(https://delivercdn.pages.dev/fonts/DigammaMono.ttf);
         }
 
         @font-face {
@@ -41,7 +30,7 @@
         }
 
         html, body {
-            font-family: 'Aller', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Roadway', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 16px;
             margin: 0;
             padding: 0;
@@ -67,7 +56,7 @@
         }
 
         #editor {
-            font-family: 'Aller Mono', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Digamma Mono', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             width: 50%;
             overflow: none;
         }
@@ -93,7 +82,7 @@
         }
 
         button {
-            font-family: 'Aller Bold', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Roadway', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             margin-right: 8px;
             padding: 6px 12px;
@@ -110,7 +99,7 @@
         }
 
         select {
-            font-family: 'Aller', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Roadway', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             background-color: #212121;
             color: #ffffff;
@@ -158,41 +147,6 @@
         ::-webkit-scrollbar-thumb:active {
             background-color: #f8f8f0;
         }
-
-        @media (max-width: 768px) {
-            .button-container {
-                justify-content: center;
-                padding: 8px;
-            }
-
-            #editor-container {
-                flex-direction: column;
-                height: auto;
-            }
-
-            #editor {
-                width: 100%;
-                height: 50vh;
-            }
-
-            #preview {
-                height: 50vh;
-                border-left: none;
-                border-top: 1px solid #000;
-            }
-
-            #divider {
-                display: none;
-            }
-        }
-
-        @media (max-width: 480px) {
-            button, select {
-                font-size: 12px;
-                padding: 4px 8px;
-                margin-right: 4px;
-            }
-        }
     </style>
 </head>
 
@@ -200,12 +154,12 @@
     <img id="logo" src="https://delivercdn.pages.dev/HtmStorm/icon.png" alt="Logo">
 
     <div class="button-container">
+        <button id="openButton">📂 Open</button>
+        <button id="saveButton">💾 Save</button>
         <select id="lineWrapSelect">
             <option value="off">Line Wrap: Off</option>
             <option value="on">Line Wrap: On</option>
         </select>
-        <button id="openButton">📂 Open</button>
-        <button id="saveButton">💾 Save</button>
     </div>
 
     <div id="editor-container">
@@ -220,7 +174,7 @@
         editor.session.setMode("ace/mode/html");
         editor.setOptions({
             fontSize: "16px",
-            fontFamily: 'Aller Mono, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
+            fontFamily: 'Digamma Mono, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
             wrap: false,
             showPrintMargin: false,
             enableBasicAutocompletion: true,
