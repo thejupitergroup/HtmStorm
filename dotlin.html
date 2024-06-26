@@ -5,32 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HtmStorm</title>
+    <title>IntelliD</title>
 
     <link rel="icon" type="image/png" href="https://delivercdn.pages.dev/HtmStorm/icon.png" sizes="30x30">
     <link rel="icon" type="image/png" href="https://delivercdn.pages.dev/HtmStorm/icon.png" sizes="600x600">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-language_tools.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-settings_menu.js"></script>
     <style>
         @font-face {
-            font-family: 'JamaisVu Sans';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuSans.ttf);
+            font-family: 'Dotlin Text';
+            src: url(https://delivercdn.pages.dev/fonts/Dotlin/DotlinText.ttf);
             font-weight: 400;
             font-style: normal;
         }
 
         @font-face {
-            font-family: 'JamaisVu Sans Bold';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuSans-Bold.ttf);
-            font-weight: 700;
-            font-style: bold;
+            font-family: 'Dotlin Text Medium';
+            src: url(https://delivercdn.pages.dev/fonts/Dotlin/DotlinText-Medium.ttf);
+            font-weight: 400;
+            font-style: normal;
         }
 
         @font-face {
-            font-family: 'JamaisVu Mono';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuMono.ttf);
+            font-family: 'Dotlin Text Bold';
+            src: url(https://delivercdn.pages.dev/fonts/Dotlin/DotlinText-Bold.ttf);
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Dotlin Sans';
+            src: url(https://delivercdn.pages.dev/fonts/DotlinSans.ttf);
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Dotlin Code';
+            src: url(https://delivercdn.pages.dev/fonts/DotlinCode-Semilight.ttf);
             font-weight: 400;
             font-style: normal;
         }
@@ -41,7 +55,7 @@
         }
 
         html, body {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Dotlin Text', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 16px;
             margin: 0;
             padding: 0;
@@ -67,22 +81,9 @@
         }
 
         #editor {
-            font-family: 'JamaisVu Mono', 'TwemojiRubisco', monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            width: 50%;
+            font-family: 'Dotlin Code', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            width: 100%;
             overflow: none;
-        }
-
-        #divider {
-            width: 3px;
-            cursor: ew-resize;
-            background-color: #000;
-        }
-
-        #preview {
-            flex: 1;
-            overflow: auto;
-            background-color: #ffffff;
-            border-left: 1px solid #000;
         }
 
         .button-container {
@@ -93,7 +94,7 @@
         }
 
         button {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Dotlin Text Medium', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             margin-right: 8px;
             padding: 6px 12px;
@@ -110,7 +111,7 @@
         }
 
         select {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Dotlin Text', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             background-color: #212121;
             color: #ffffff;
@@ -131,12 +132,6 @@
             padding-top: 8px;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
         ::-webkit-scrollbar {
             background: #272822;
         }
@@ -174,16 +169,6 @@
                 width: 100%;
                 height: 50vh;
             }
-
-            #preview {
-                height: 50vh;
-                border-left: none;
-                border-top: 1px solid #000;
-            }
-
-            #divider {
-                display: none;
-            }
         }
 
         @media (max-width: 480px) {
@@ -210,17 +195,15 @@
 
     <div id="editor-container">
         <div id="editor"></div>
-        <div id="divider"></div>
-        <iframe id="preview"></iframe>
     </div>
 
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/chaos");
-        editor.session.setMode("ace/mode/html");
+        editor.session.setMode("ace/mode/dotlin");
         editor.setOptions({
             fontSize: "16px",
-            fontFamily: 'JamaisVu Mono, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
+            fontFamily: 'Dotlin Code, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
             wrap: false,
             showPrintMargin: false,
             enableBasicAutocompletion: true,
@@ -231,14 +214,13 @@
         function openFile() {
             var input = document.createElement('input');
             input.type = 'file';
-            input.accept = 'text/html';
+            input.accept = '.dt';
             input.onchange = function(event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
                 reader.onload = function() {
                     editor.setValue(reader.result);
                     document.title = file.name + " - HtmStorm";
-                    updatePreview();
                 };
                 reader.readAsText(file);
             };
@@ -247,12 +229,12 @@
 
         function saveFile() {
             var content = editor.getValue();
-            var blob = new Blob([content], { type: 'text/html' });
+            var blob = new Blob([content], { type: 'text/plain' });
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
             var currentDate = new Date().toISOString().slice(0, 19).replace(/[-T:/]/g, '');
-            var fileName = 'html_' + currentDate + '.html';
+            var fileName = 'dotlin_' + currentDate + '.dt';
             a.download = fileName;
             document.title = fileName;
             document.body.appendChild(a);
@@ -274,13 +256,7 @@
                 fileName += "*";
             }
             document.title = fileName;
-            updatePreview();
         });
-
-        function updatePreview() {
-            var preview = document.getElementById('preview');
-            preview.srcdoc = editor.getValue();
-        }
 
         window.addEventListener('beforeunload', function(e) {
             if (isModified) {
@@ -304,35 +280,6 @@
                 openFile();
             }
         });
-
-        var divider = document.getElementById('divider');
-        var editorContainer = document.getElementById('editor-container');
-        var editorElement = document.getElementById('editor');
-        var isResizing = false;
-
-        divider.addEventListener('mousedown', function(e) {
-            isResizing = true;
-            document.body.style.cursor = 'ew-resize';
-        });
-
-        document.addEventListener('mousemove', function(e) {
-            if (isResizing) {
-                var offsetRight = editorContainer.clientWidth - (e.clientX - editorContainer.offsetLeft);
-                var editorWidth = editorContainer.clientWidth - offsetRight;
-                editorWidth = Math.max(editorWidth, 100);
-                editorElement.style.width = editorWidth + 'px';
-                editor.resize();
-            }
-        });
-
-        document.addEventListener('mouseup', function() {
-            if (isResizing) {
-                isResizing = false;
-                document.body.style.cursor = 'default';
-            }
-        });
-
-        updatePreview();
     </script>
 </body>
 </html>

@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>HtmStorm</title>
-
     <link rel="icon" type="image/png" href="https://delivercdn.pages.dev/HtmStorm/icon.png" sizes="30x30">
     <link rel="icon" type="image/png" href="https://delivercdn.pages.dev/HtmStorm/icon.png" sizes="600x600">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ace.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-language_tools.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.14/ext-settings_menu.js"></script>
     <style>
         @font-face {
-            font-family: 'JamaisVu Sans';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuSans.ttf);
+            font-family: 'Aller';
+            src: url(https://delivercdn.pages.dev/fonts/aller/aller-regular.ttf);
             font-weight: 400;
             font-style: normal;
         }
 
         @font-face {
-            font-family: 'JamaisVu Sans Bold';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuSans-Bold.ttf);
+            font-family: 'Aller Bold';
+            src: url(https://delivercdn.pages.dev/fonts/aller/aller-bold.ttf);
             font-weight: 700;
             font-style: bold;
         }
 
         @font-face {
-            font-family: 'JamaisVu Mono';
-            src: url(https://delivercdn.pages.dev/WebKernel/fonts/aurorasoft/JamaisVuMono.ttf);
+            font-family: 'Aller Mono';
+            src: url(https://delivercdn.pages.dev/fonts/aller/allermono.ttf);
             font-weight: 400;
             font-style: normal;
         }
@@ -40,8 +38,9 @@
             src: url(https://jstatic.pages.dev/files/products/ide/fonts/TwemojiRubisco.ttf);
         }
 
-        html, body {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        html,
+        body {
+            font-family: 'Aller', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 16px;
             margin: 0;
             padding: 0;
@@ -67,7 +66,7 @@
         }
 
         #editor {
-            font-family: 'JamaisVu Mono', 'TwemojiRubisco', monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Aller Mono', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             width: 50%;
             overflow: none;
         }
@@ -93,7 +92,7 @@
         }
 
         button {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Aller Bold', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             margin-right: 8px;
             padding: 6px 12px;
@@ -110,7 +109,7 @@
         }
 
         select {
-            font-family: 'JamaisVu Sans', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Aller', 'TwemojiRubisco', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 14px;
             background-color: #212121;
             color: #ffffff;
@@ -136,7 +135,7 @@
             height: 100%;
             border: none;
         }
-        
+
         ::-webkit-scrollbar {
             background: #272822;
         }
@@ -187,7 +186,9 @@
         }
 
         @media (max-width: 480px) {
-            button, select {
+
+            button,
+            select {
                 font-size: 12px;
                 padding: 4px 8px;
                 margin-right: 4px;
@@ -198,7 +199,6 @@
 
 <body>
     <img id="logo" src="https://delivercdn.pages.dev/HtmStorm/icon.png" alt="Logo">
-
     <div class="button-container">
         <select id="lineWrapSelect">
             <option value="off">Line Wrap: Off</option>
@@ -206,36 +206,34 @@
         </select>
         <button id="openButton">📂 Open</button>
         <button id="saveButton">💾 Save</button>
+        <input type="range" id="sizeSlider" min="10" max="90" value="50" style="margin-left: 8px;">
     </div>
-
     <div id="editor-container">
         <div id="editor"></div>
         <div id="divider"></div>
         <iframe id="preview"></iframe>
     </div>
-
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/chaos");
         editor.session.setMode("ace/mode/html");
         editor.setOptions({
             fontSize: "16px",
-            fontFamily: 'JamaisVu Mono, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
+            fontFamily: 'Aller Mono, TwemojiRubisco, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
             wrap: false,
             showPrintMargin: false,
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
             enableSnippets: true
         });
-
         function openFile() {
             var input = document.createElement('input');
             input.type = 'file';
             input.accept = 'text/html';
-            input.onchange = function(event) {
+            input.onchange = function (event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
-                reader.onload = function() {
+                reader.onload = function () {
                     editor.setValue(reader.result);
                     document.title = file.name + " - HtmStorm";
                     updatePreview();
@@ -244,7 +242,6 @@
             };
             input.click();
         }
-
         function saveFile() {
             var content = editor.getValue();
             var blob = new Blob([content], { type: 'text/html' });
@@ -261,41 +258,34 @@
             document.body.removeChild(a);
             isModified = false;
         }
-
         document.getElementById('openButton').addEventListener('click', openFile);
         document.getElementById('saveButton').addEventListener('click', saveFile);
-
         var isModified = false;
-
-        editor.session.on('change', function() {
+        editor.session.on('change', function () {
             isModified = true;
             var fileName = document.title;
-            if (!fileName.endsWith('*')) {
-                fileName += "*";
+            if (!fileName.endsWith('')) {
+                fileName += "";
             }
             document.title = fileName;
             updatePreview();
         });
-
         function updatePreview() {
             var preview = document.getElementById('preview');
             preview.srcdoc = editor.getValue();
         }
-
-        window.addEventListener('beforeunload', function(e) {
+        window.addEventListener('beforeunload', function (e) {
             if (isModified) {
                 var confirmationMessage = 'You have unsaved changes. Are you sure you want to leave?';
                 e.returnValue = confirmationMessage;
                 return confirmationMessage;
             }
         });
-
-        document.getElementById('lineWrapSelect').addEventListener('change', function() {
+        document.getElementById('lineWrapSelect').addEventListener('change', function () {
             var value = this.value === 'on';
             editor.setOption('wrap', value);
         });
-
-        window.addEventListener('keydown', function(event) {
+        window.addEventListener('keydown', function (event) {
             if (event.ctrlKey && event.key === 's') {
                 event.preventDefault();
                 saveFile();
@@ -304,18 +294,15 @@
                 openFile();
             }
         });
-
         var divider = document.getElementById('divider');
         var editorContainer = document.getElementById('editor-container');
         var editorElement = document.getElementById('editor');
         var isResizing = false;
-
-        divider.addEventListener('mousedown', function(e) {
+        divider.addEventListener('mousedown', function (e) {
             isResizing = true;
             document.body.style.cursor = 'ew-resize';
         });
-
-        document.addEventListener('mousemove', function(e) {
+        document.addEventListener('mousemove', function (e) {
             if (isResizing) {
                 var offsetRight = editorContainer.clientWidth - (e.clientX - editorContainer.offsetLeft);
                 var editorWidth = editorContainer.clientWidth - offsetRight;
@@ -324,15 +311,21 @@
                 editor.resize();
             }
         });
-
-        document.addEventListener('mouseup', function() {
+        document.addEventListener('mouseup', function () {
             if (isResizing) {
                 isResizing = false;
                 document.body.style.cursor = 'default';
             }
         });
-
+        document.getElementById('sizeSlider').addEventListener('input', function () {
+            var sliderValue = this.value;
+            editorElement.style.width = sliderValue + '%';
+            document.getElementById('preview').style.width = (100 - sliderValue) + '%';
+            editor.resize();
+        });
         updatePreview();
     </script>
+
 </body>
+
 </html>
